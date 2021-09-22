@@ -1,0 +1,229 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "My User Project CRUD",
+      "description": "My User Project Application API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:8000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Users",
+        "description": "API for users in the system"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    
+        "definitions": {
+          "User": {
+            "required": ["name", "_id", "companies"],
+            "properties": {
+              "_id": {
+                "type": "integer",
+                "uniqueItems": true
+              },
+              "isPublic": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              },
+              "books": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "amount": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "companies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "Users": {
+            "type": "array",
+            "$ref": "#/definitions/User"
+          },
+          "updateUser": {
+            "required": ["name", "companies"],
+            "properties": {
+              "isPublic": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              },
+              "books": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "amount": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "companies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+       
+        "paths": {
+            "/users": {
+              "get": {
+                "tags": ["Users"],
+                "summary": "Get all users in system",
+                "responses": {
+                  "200": {
+                    "description": "OK",
+                    "schema": {
+                      "$ref": "#/definitions/Users"
+                    }
+                  }
+                }
+              }
+            },
+            "/users/{userID}": {
+              "get": {
+                "tags": ["Users"],
+                "summary": "Get an user in system",
+                "description": "Getting a specific user",
+                "parameters": [
+                  {
+                    "name": "userID",
+                    "in": "path",
+                    "required": true,
+                    
+                    "schema": {
+                      "$ref": "#/definitions/Users"
+                    }
+                  }
+                ],
+                "responses": {
+                  "200": {
+                    "description": "OK",
+                    "schema": {
+                      "$ref": "#/definitions/User"
+                    },
+                    "400": {
+                      "description": "The specified user ID is invalid"
+                    },
+                    "404": {
+                      "description": "A user with the specified ID was not found"
+                    }
+                  }
+                }
+              }
+            },
+            "/addUser": {
+              "post": {
+                "summary":"Add a new user",
+                "tags": ["Users"],
+                "description": "Create new user in system",
+                "parameters": [
+                  {
+                    "name": "user",
+                    "in": "body",
+                    "description": "User that we want to create",
+                    "schema": {
+                      "$ref": "#/definitions/User"
+                    }
+                  }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                  "201": {
+                    "description": "New user is created",
+                    "schema": {
+                      "$ref": "#/definitions/User"
+                    }
+                  }
+                }
+              }
+            },
+            "/user/{id}": {
+                "parameters": [
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of user that we want to find",
+                    "type": "integer"
+                  }
+                ],
+                "put": {
+                  "summary": "Update user with give ID",
+                  "tags": ["Users"],
+                  "parameters": [
+                    {
+                      "name": "user",
+                      "in": "body",
+                      "description": "User with new values of properties",
+                      "schema": {
+                        "$ref": "#/definitions/updateUser"
+                      }
+                    }
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "User is updated",
+                      "schema": {
+                        "$ref": "#/definitions/User"
+                      }
+                    }
+                  }
+                }
+              },
+              "/deleteUser/{id}": {
+                "parameters": [
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of user that we want to find",
+                    "type": "integer"
+                  }
+                ],
+                "delete": {
+                    "summary": "Delete user with given ID",
+                    "tags": ["Users"],
+                    "responses": {
+                      "200": {
+                        "description": "User is deleted",
+                        "schema": {
+                          "$ref": "#/definitions/User"
+                        }
+                      }
+                    }
+                  }
+              }
+          }
+        
+      
+  }

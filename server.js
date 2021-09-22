@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 import bodyParser from 'body-parser';
 import { getUserList ,findUserById } from "./user";
 app.use(bodyParser.urlencoded({extended:true}));
@@ -12,6 +14,29 @@ app.get("/users", (req, res) => {
     success: "true",
     message: "users",
     users: userList,
+  });
+});
+app.get("/users/:id", (req, res) => {
+  const id = req.params.id;
+  const userFound=findUserById(id)
+
+  if(id!=parseInt(id)){
+    return res.status(400).send({
+      success: 'false',
+      message: 'user not valid',
+    });
+  }
+
+  if (!userFound) {
+    return res.status(404).send({
+      success: 'false',
+      message: 'user not found',
+    });
+  }
+  return res.status(200).send({
+    success: "OK",
+    message: "User found",
+    user: userFound,
   });
 });
 
@@ -123,7 +148,11 @@ app.delete("/deleteUser/:id", (req, res) => {
               message: 'error in delete'   
     });
 })
-
+app.use(
+  '/api-docs',
+  swaggerUi.serve, 
+  swaggerUi.setup(swaggerDocument)
+);
 
 app.listen(8000, () => {
   console.log("server listening on port 8000!");
