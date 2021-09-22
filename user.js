@@ -38,7 +38,7 @@ export const getUserList = () =>  {
 export const findUserById = (id) =>{
 const users = getUserList()
    const userFound = users.filter((user) => {
-        if (user.id === id) {
+        if (user.id == id) {
              return user
         }   
     });

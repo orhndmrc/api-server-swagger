@@ -109,14 +109,14 @@
                 }
               }
             },
-            "/users/{userID}": {
+            "/users/{id}": {
               "get": {
                 "tags": ["Users"],
                 "summary": "Get an user in system",
                 "description": "Getting a specific user",
                 "parameters": [
                   {
-                    "name": "userID",
+                    "name": "id",
                     "in": "path",
                     "required": true,
                     
@@ -167,7 +167,7 @@
                 }
               }
             },
-            "/user/{id}": {
+            "/updateUser/{id}": {
                 "parameters": [
                   {
                     "name": "id",
