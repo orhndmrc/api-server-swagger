@@ -4,7 +4,7 @@ export const getUserList = () =>  {
             id: 1,
             isPublic: true,
             name: 'user1',
-            companies: ['com1', 'com2', 'com3'],
+            companies: ['comp1', 'comp2', 'comp3'],
             books: [{
                 name: 'book1',
                 amount: 1,
@@ -19,7 +19,7 @@ export const getUserList = () =>  {
             id: 2,
             isPublic: true,
             name: 'kk',
-            companies: ['com1', 'com2', 'com3'],
+            companies: ['comp1', 'comp2', 'comp3'],
             books: [
                 {
                     name: 'kk2',
