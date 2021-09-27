@@ -153,7 +153,8 @@ app.use(
   swaggerUi.serve, 
   swaggerUi.setup(swaggerDocument)
 );
-
-app.listen(8000, () => {
-  console.log("server listening on port 8000!");
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.warn(`App listening on http://localhost:${PORT}`);
 });
+
