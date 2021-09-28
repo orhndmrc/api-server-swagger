@@ -9,7 +9,10 @@ simple project with node and express to create restful api's (CRUD)
  
  open browser and run below url
  
- http://localhost:8000/
+ http://localhost:1001/
+
+ # swagger Ui link
+http://localhost:1001/api-docs/
 
 # server.js 
 is used to handle all routes 
