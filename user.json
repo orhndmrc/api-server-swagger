@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "isPublic": true,
+        "name": "user1",
+        "companies": [
+            "comp1",
+            "comp2",
+            "comp3"
+        ],
+        "books": [
+            {
+                "name": "book1",
+                "amount": 1
+            },
+            {
+                "name": "book2",
+                "amount": 200
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "isPublic": true,
+        "name": "kk",
+        "companies": [
+            "comp1",
+            "comp2",
+            "comp3"
+        ],
+        "books": [
+            {
+                "name": "kk2",
+                "amount": 1
+            },
+            {
+                "name": "kk2",
+                "amount": 200
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "isPublic": true,
+        "name": "user9",
+        "companies": [
+            "Aspentech"
+        ],
+        "books": [
+            {
+                "name": "course47",
+                "amount": 0
+            }
+        ]
+    }
+]

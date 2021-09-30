@@ -1,13 +1,15 @@
 require('dotenv').config();
+const fs = require('fs')
+const userList = require('./user.json')
 const express = require("express");
 const app = express();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 import bodyParser from 'body-parser';
-import { getUserList ,findUserById } from "./user";
+import {findUserById } from "./userFunction";
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json())
-const userList = getUserList(); // assume for now this is your database
+//const userList = getUserList(); // assume for now this is your database
 
 // GET Call for all users
 app.get("/users", (req, res) => {
@@ -19,7 +21,7 @@ app.get("/users", (req, res) => {
 });
 app.get("/users/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const userFound=findUserById(id)
+  const userFound=findUserById(id,userList)
 
   if(id!=parseInt(id)){
     return res.status(400).send({
@@ -72,6 +74,12 @@ app.post("/addUser", (req, res) => {
     books:  req.body.books
   };
   userList.push(user);
+  // fs.writeFile('./user.json', JSON.stringify(userList),err=>{
+  //   if(err){
+  //     console.log(err)
+  //   }
+  
+  // })
   return res.status(201).send({
     success: "true",
     message: "user added successfully",
